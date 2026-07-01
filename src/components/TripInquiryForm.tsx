@@ -76,6 +76,7 @@ export default function TripInquiryForm() {
         </div>
 
         <form
+          noValidate
           onSubmit={handleSubmit(onSubmit)}
           className="grid gap-4 border-2 border-[#18231d] bg-[#f5efe3] p-6 shadow-[10px_10px_0_#6b9f88]"
         >
@@ -97,9 +98,9 @@ export default function TripInquiryForm() {
               name="name"
               label="Full name"
               placeholder="e.g. Ayesha Khan"
-              required
               helperText="Enter the name we should use when contacting you."
               rules={{
+                required: "Full name is required",
                 minLength: {
                   value: 3,
                   message: "Name must be at least 3 characters",
@@ -115,9 +116,9 @@ export default function TripInquiryForm() {
               name="contact"
               label="Email or phone"
               placeholder="e.g. ayesha@email.com"
-              required
               helperText="Use an email"
               rules={{
+                required: "Email is required",
                 pattern: {
                   value: contactPattern,
                   message: "Enter a valid email",
@@ -132,9 +133,9 @@ export default function TripInquiryForm() {
               name="destination"
               label="Preferred destination"
               options={destinations}
-              required
               helperText="Select the main place you want to visit."
               rules={{
+                required: "Destination is required",
                 validate: (value) =>
                   destinations.includes(value) || "Choose a valid destination",
               }}
@@ -144,9 +145,9 @@ export default function TripInquiryForm() {
               name="travelMonth"
               label="Preferred travel month"
               options={travelMonths}
-              required
               helperText="Choose the season that matches your plan."
               rules={{
+                required: "Travel month is required",
                 validate: (value) =>
                   travelMonths.includes(value) || "Choose a valid travel month",
               }}
