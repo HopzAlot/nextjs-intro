@@ -15,18 +15,25 @@ const learningCards = [
 
 export default function LearningSection() {
   return (
-    <section id="learn" className="learn-section">
-      <div className="container">
-        <div className="section-heading">
-          <p className="eyebrow">What You Learn</p>
-          <h2>Three ideas carry the whole starter project.</h2>
+    <section id="learn" className="bg-[#fffdf6] py-[70px]">
+      <div className="mx-auto max-w-6xl px-6 max-sm:px-4">
+        <div className="max-w-[680px]">
+          <p className="text-[13px] font-black tracking-[3px] text-[#d65a31] uppercase">
+            What You Learn
+          </p>
+          <h2 className="mt-3 text-[38px] leading-[1.15] font-black">
+            Three ideas carry the whole starter project.
+          </h2>
         </div>
 
-        <div className="cards-grid">
+        <div className="mt-10 grid grid-cols-3 gap-5 max-md:grid-cols-1">
           {learningCards.map((card) => (
-            <article key={card.title} className="info-card">
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
+            <article
+              key={card.title}
+              className="border-2 border-[#17201a] bg-[#f7f3ea] p-6"
+            >
+              <h3 className="text-[22px] font-black">{card.title}</h3>
+              <p className="mt-3 leading-7 text-[#4b554b]">{card.text}</p>
             </article>
           ))}
         </div>

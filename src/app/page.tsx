@@ -6,7 +6,7 @@ import WorkflowSection from "@/components/WorkflowSection";
 
 export default function Home() {
   return (
-    <main className="page">
+    <main className="min-h-screen">
       <Header />
       <Hero />
       <LearningSection />
