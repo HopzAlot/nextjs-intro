@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NextStart | Intern Practice",
-  description: "A simple Next.js practice website for learning project basics.",
+  title: "Safarnama | Northern Pakistan Travel",
+  description:
+    "Plan guided trips to Hunza, Skardu, Naran, and the northern valleys of Pakistan.",
 };
 
 export default function RootLayout({
@@ -13,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#f7f3ea] text-[#17201a] [font-family:'Trebuchet_MS','Segoe_UI',sans-serif]">
+      <body className="bg-[#f5efe3] text-[#18231d] [font-family:'Trebuchet_MS','Segoe_UI',sans-serif]">
         {children}
       </body>
     </html>
