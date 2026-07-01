@@ -17,7 +17,7 @@ type TripInquiryFormValues = {
 const destinations = ["Hunza", "Skardu", "Naran & Kaghan", "Fairy Meadows"];
 const travelMonths = ["March-May", "June-August", "September-November", "Flexible"];
 const contactPattern =
-  /^([^\s@]+@[^\s@]+\.[^\s@]+|(\+92|0)?3[0-9]{9})$/;
+  /^([^\s@]+@[^\s@]+\.[^\s@]+)$/;
 
 const defaultValues: TripInquiryFormValues = {
   name: "",
@@ -70,8 +70,8 @@ export default function TripInquiryForm() {
             Tell us where the road should take you.
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-8 text-[#536052]">
-            This form uses React Hook Form controllers, reusable MUI fields, and
-            a Next.js API route to securely store each request in Firestore.
+            Fill in your contact details and preferred route. We will use this
+            to prepare a practical northern Pakistan travel plan.
           </p>
         </div>
 
@@ -96,7 +96,9 @@ export default function TripInquiryForm() {
               control={control}
               name="name"
               label="Full name"
+              placeholder="e.g. Ayesha Khan"
               required
+              helperText="Enter the name we should use when contacting you."
               rules={{
                 minLength: {
                   value: 3,
@@ -112,12 +114,13 @@ export default function TripInquiryForm() {
               control={control}
               name="contact"
               label="Email or phone"
+              placeholder="e.g. ayesha@email.com"
               required
-              helperText="Use an email or Pakistani mobile number"
+              helperText="Use an email"
               rules={{
                 pattern: {
                   value: contactPattern,
-                  message: "Enter a valid email or Pakistani mobile number",
+                  message: "Enter a valid email",
                 },
               }}
             />
@@ -127,9 +130,10 @@ export default function TripInquiryForm() {
             <FormSelectField
               control={control}
               name="destination"
-              label="Destination"
+              label="Preferred destination"
               options={destinations}
               required
+              helperText="Select the main place you want to visit."
               rules={{
                 validate: (value) =>
                   destinations.includes(value) || "Choose a valid destination",
@@ -138,9 +142,10 @@ export default function TripInquiryForm() {
             <FormSelectField
               control={control}
               name="travelMonth"
-              label="Travel month"
+              label="Preferred travel month"
               options={travelMonths}
               required
+              helperText="Choose the season that matches your plan."
               rules={{
                 validate: (value) =>
                   travelMonths.includes(value) || "Choose a valid travel month",
@@ -152,6 +157,7 @@ export default function TripInquiryForm() {
             control={control}
             name="message"
             label="Trip details"
+            placeholder="e.g. We are 4 people from Lahore, planning a 5-day trip in July."
             multiline
             minRows={4}
             helperText="Group size, preferred dates, budget, or special requests."
