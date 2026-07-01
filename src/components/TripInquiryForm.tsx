@@ -29,6 +29,7 @@ const defaultValues: TripInquiryFormValues = {
 
 export default function TripInquiryForm() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const {
     control,
     handleSubmit,
@@ -38,6 +39,7 @@ export default function TripInquiryForm() {
 
   const onSubmit = async (values: TripInquiryFormValues) => {
     setStatus("idle");
+    setErrorMessage("");
 
     try {
       const response = await fetch("/api/inquiries", {
@@ -49,12 +51,18 @@ export default function TripInquiryForm() {
       });
 
       if (!response.ok) {
-        throw new Error("Could not save inquiry");
+        const result = (await response.json()) as { error?: string };
+        throw new Error(result.error ?? "Could not save inquiry");
       }
 
       reset(defaultValues);
       setStatus("success");
-    } catch {
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Inquiry could not be sent. Check Firebase setup and try again."
+      );
       setStatus("error");
     }
   };
@@ -88,7 +96,7 @@ export default function TripInquiryForm() {
 
           {status === "error" && (
             <Alert severity="error">
-              Inquiry could not be sent. Check Firebase setup and try again.
+              {errorMessage}
             </Alert>
           )}
 

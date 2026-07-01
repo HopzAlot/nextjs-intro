@@ -69,9 +69,16 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ ok: true }, { status: 201 });
-  } catch {
+  } catch (error) {
+    console.error("Inquiry save failed", error);
+
     return NextResponse.json(
-      { error: "Could not save inquiry" },
+      {
+        error:
+          process.env.NODE_ENV === "development" && error instanceof Error
+            ? error.message
+            : "Could not save inquiry",
+      },
       { status: 500 }
     );
   }
